@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0e16">
+  <meta name="description" content="Julie’s digital lab — systems, infrastructure and experiments.">
+  <title>Julie@dev — Home</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style_old.css') }}">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#home">julie@dev:<span>~</span></a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a class="active" href="#home">/ home</a>
+        <a href="#knowledge">/ knowledge</a>
+        <a href="#projects">/ projects</a>
+        <a href="#notes">/ notes</a>
+        <a href="#about">/ about</a>
+      </nav>
+      <div class="topbar-meta"><span class="status-dot"></span><span>PERSONAL SYSTEM</span></div>
+    </header>
+
+    <main id="home" class="dashboard">
+      <aside class="left-column">
+        <section class="panel log-panel">
+          <h2 class="panel-title">&gt; system.log</h2>
+          <div class="panel-body">
+            <p>Welcome to my digital lab.</p>
+            <p>Feel free to explore.</p>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2 class="panel-title">&gt; quick.links</h2>
+          <nav class="quick-links" aria-label="Quick links">
+            <a href="#lab"><span>[01]</span> / homelab</a>
+            <a href="#knowledge"><span>[02]</span> / knowledge map</a>
+            <a href="#projects"><span>[03]</span> / projects</a>
+            <a href="#notes"><span>[04]</span> / research</a>
+            <a href="#notes"><span>[05]</span> / notes</a>
+            <a href="#about"><span>[06]</span> / about</a>
+          </nav>
+        </section>
+
+        <section class="panel now-playing">
+          <h2 class="panel-title">&gt; now.playing</h2>
+          <div class="music-row">
+            <div class="album-art" aria-hidden="true"><span>JL</span></div>
+            <div class="music-info">
+              <strong>Lo-fi / focus mode</strong>
+              <span>signal lost in space</span>
+              <div class="fake-progress"><span></span></div>
+              <small>personal soundtrack</small>
+            </div>
+          </div>
+          <p class="muted tiny">Music widget placeholder — no audio is playing.</p>
+        </section>
+
+        <section class="panel connect-panel">
+          <h2 class="panel-title">&gt; connect</h2>
+          <div class="social-links">
+            <a href="https://github.com/" target="_blank" rel="noreferrer" aria-label="GitHub">GH</a>
+            <a href="mailto:hello@example.com" aria-label="Email">@</a>
+            <a href="#projects" aria-label="Projects">&gt;_</a>
+            <a href="#about" aria-label="About">↗</a>
+          </div>
+          <p class="muted tiny">Replace these links with your real profiles.</p>
+        </section>
+
+        <section class="panel quote-panel">
+          <h2 class="panel-title">&gt; quote.txt</h2>
+          <blockquote>
+            “We build, we break,<br>
+            we learn, we automate.<br>
+            Then we build again.”
+          </blockquote>
+          <span class="quote-author">— Julie</span>
+          <div class="pixel-spark" aria-hidden="true">✳</div>
+        </section>
+      </aside>
+
+      <div class="center-column">
+        <section class="panel hero">
+          <div class="hero-copy">
+            <p class="eyebrow">&gt; hello world!</p>
+            <h1>Hi, I'm <span>Julie.</span></h1>
+            <p class="hero-description">
+              I build systems, infrastructure and intelligent solutions at the
+              intersection of software, hardware and networks.
+            </p>
+            <div class="tag-list" aria-label="Areas of interest">
+              <span>AI</span><span>INFRASTRUCTURE</span><span>EMBEDDED</span>
+              <span>NETWORKING</span><span>FPGA</span><span>AUTOMATION</span>
+              <span>CYBERSECURITY</span><span>LINUX</span>
+            </div>
+            <p class="terminal-line"><span>&gt;</span> always building. always learning.<b></b></p>
+          </div>
+          <div class="hero-art" role="img" aria-label="Abstract purple-lit technology workspace illustration">
+            <div class="art-grid"></div>
+            <div class="art-orb orb-one"></div><div class="art-orb orb-two"></div>
+            <div class="art-window window-one"></div><div class="art-window window-two"></div>
+            <div class="art-caption">DIGITAL LAB / 001</div>
+          </div>
+        </section>
+
+        <div class="middle-grid">
+          <section class="panel architecture" id="lab">
+            <h2 class="panel-title">&gt; infrastructure.overview</h2>
+            <div class="architecture-map">
+              <div class="node internet"><span class="node-icon">◎</span><span>Internet<small>external network</small></span></div>
+              <div class="node tailscale"><span class="node-icon">⌘</span><span>Tailscale<small>private overlay</small></span><i></i></div>
+              <div class="node proxy"><span class="node-icon">◇</span><span>Reverse Proxy<small>planned / Traefik</small></span><i></i></div>
+              <div class="node services"><span class="node-icon">▦</span><span>Services<small>self-hosted apps</small></span><i></i></div>
+              <div class="node pi-core"><span class="node-icon">▤</span><span>Pi Core<small>Raspberry Pi 5 · 8 GB</small></span><i></i></div>
+              <div class="node pi-ai"><span class="node-icon">✳</span><span>Pi AI<small>planned · 16 GB</small></span><i class="planned"></i></div>
+              <div class="node nas"><span class="node-icon">▤</span><span>NAS<small>planned storage</small></span></div>
+              <div class="node iot"><span class="node-icon">⌁</span><span>IoT Network<small>future sensors</small></span></div>
+              <svg class="connectors" viewBox="0 0 600 260" preserveAspectRatio="none" aria-hidden="true">
+                <path d="M88 82 H155 M250 82 H320 M410 82 H485 M365 100 V160 M190 100 V160 M190 190 H150 M365 190 H405"/>
+              </svg>
+            </div>
+            <a class="panel-link" href="#lab">view infrastructure notes <span>→</span></a>
+          </section>
+
+          <section class="panel featured" id="projects">
+            <h2 class="panel-title">&gt; featured.projects</h2>
+            <div class="project-list">
+              {% for project in projects %}
+              <a class="project-item" href="{{ project.href }}">
+                <span class="project-icon">{{ project.icon }}</span>
+                <span class="project-copy"><strong>{{ project.name }}</strong><small>{{ project.description }}</small></span>
+              </a>
+              {% endfor %}
+            </div>
+            <a class="panel-link" href="#projects">view all projects <span>→</span></a>
+          </section>
+        </div>
+
+        <div class="bottom-grid">
+          <section class="panel latest-notes" id="notes">
+            <h2 class="panel-title">&gt; latest.notes</h2>
+            <div class="notes-list">
+              {% for note in notes %}
+              <a href="#notes" class="note-row">
+                <span class="note-title">{{ note.title }}</span>
+                <span class="mini-tag">{{ note.tag }}</span>
+                <time>{{ note.date }}</time>
+              </a>
+              {% endfor %}
+            </div>
+          </section>
+
+          <section class="panel skills-panel" id="knowledge">
+            <h2 class="panel-title">&gt; skills.map</h2>
+            <div class="skill-map" aria-label="Knowledge areas map">
+              <svg viewBox="0 0 300 220" aria-hidden="true">
+                <polygon points="150,28 218,62 230,130 190,184 110,184 70,130 82,62"/>
+                <path d="M150 28 L230 130 L110 184 L82 62 L190 184 L218 62 L70 130 L150 28 M82 62 L190 184 M218 62 L110 184 M70 130 L230 130"/>
+                <circle cx="150" cy="28" r="4"/><circle cx="218" cy="62" r="4"/>
+                <circle cx="230" cy="130" r="4"/><circle cx="190" cy="184" r="4"/>
+                <circle cx="110" cy="184" r="4"/><circle cx="70" cy="130" r="4"/>
+                <circle cx="82" cy="62" r="4"/>
+              </svg>
+              <span class="skill-label s-ai">AI / ML</span><span class="skill-label s-linux">Linux</span>
+              <span class="skill-label s-net">Networking</span><span class="skill-label s-fpga">FPGA</span>
+              <span class="skill-label s-auto">Automation</span><span class="skill-label s-sec">Security</span>
+              <span class="skill-label s-emb">Embedded</span>
+            </div>
+            <p class="muted tiny centered">An evolving map — not a proficiency ranking.</p>
+          </section>
+        </div>
+      </div>
+
+      <aside class="right-column">
+        <section class="panel status-panel">
+          <h2 class="panel-title">&gt; system.status</h2>
+          <div class="status-list">
+            <div><span>Lab status</span><strong>{{ status.lab_uptime }}</strong></div>
+            <div><span>Devices</span><strong>{{ status.devices_online }}</strong></div>
+            <div><span>Services</span><strong>{{ status.services_running }}</strong></div>
+            <div><span>Tailscale</span><strong>{{ status.tailscale }}</strong></div>
+            <div><span>Internet</span><strong>{{ status.internet }}</strong></div>
+          </div>
+          <p class="muted tiny">Static demo values; not live telemetry.</p>
+        </section>
+
+        <section class="panel clock-panel">
+          <div id="clock" class="clock">--:--:--</div>
+          <div id="date" class="clock-date">LOCAL TIME</div>
+          <p>未来を作るのは、今の自分。</p>
+        </section>
+
+        <section class="panel terminal-panel">
+          <h2 class="panel-title">&gt; terminal</h2>
+          <div class="terminal-content">
+            <pre class="ascii-art" aria-hidden="true">  
+    .--.
+   |o_o |
+   |:_/ |
+  //    \\
+  (|     |)
+ /'\\_   _/`\
+ \\___)=(___/</pre>
+            <div class="terminal-data">
+              <p class="prompt">julie@lab <span>~</span></p>
+              <p><b>OS:</b> Linux / personal lab</p>
+              <p><b>Shell:</b> curious mind</p>
+              <p><b>Focus:</b> systems engineering</p>
+              <p><b>CPU:</b> learning in progress</p>
+              <p><b>Memory:</b> always expanding</p>
+              <div class="memory-bar"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            </div>
+          </div>
+        </section>
+      </aside>
+    </main>
+
+    <section class="panel gallery-panel">
+      <h2 class="panel-title">&gt; lab.gallery</h2>
+      <div class="gallery-grid">
+        <div class="gallery-card gallery-one"><span>Current setup</span></div>
+        <div class="gallery-card gallery-two"><span>Raspberry nodes</span></div>
+        <div class="gallery-card gallery-three"><span>Network corner</span></div>
+        <div class="gallery-card gallery-four"><span>IoT experiments</span></div>
+      </div>
+      <p class="muted tiny">Gallery placeholders — replace with photos of your real setup.</p>
+    </section>
+
+    <footer class="footer" id="about">
+      <span>© {{ year }} Julie's Lab</span>
+      <span>Building the <b>future</b>, one system at a time.</span>
+      <a href="#home">&gt; back to top ▴</a>
+    </footer>
+  </div>
+  <script>
+    function updateClock() {
+      const now = new Date();
+      document.getElementById("clock").textContent =
+        now.toLocaleTimeString([], { hour12: false });
+      document.getElementById("date").textContent =
+        now.toLocaleDateString([], { weekday: "long", day: "2-digit", month: "long", year: "numeric" });
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
+</body>
+</html>

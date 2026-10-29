@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0e16">
+  <meta name="description" content="Julie’s digital lab — systems, infrastructure and experiments.">
+  <title>Julie@dev — Home</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="app-shell">
+    
+    <!-- HEADER -->
+    <header class="topbar">
+      <a class="brand" href="#home">julie@dev:<span>~</span></a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <a class="active" href="#home">Home</a>
+        <a href="#knowledge">Knowledge</a>
+        <a href="#projects">Projects</a>
+        <a href="#notes">Notes</a>
+        <a href="#about">About</a>
+      </nav>
+      <div class="topbar-meta"><span class="status-dot"></span><span>PERSONAL SYSTEM</span></div>
+    </header>
+
+    <!-- DASHBOARD LAYOUT PRINCIPAL -->
+    <main class="dashboard-grid" id="home">
+      
+      <!-- COLUMNA IZQUIERDA (Principal) -->
+      <div class="main-column">
+        
+        <!-- 01 - HERO -->
+        <section class="panel hero">
+          <div class="hero-copy">
+            <p class="eyebrow">> Hello World!</p>
+            <h1>Hi, I'm <span>Julie.</span></h1>
+            <p class="hero-description">
+              {{ hero.description }}
+            </p>
+            <div class="tag-list" aria-label="Areas of interest">
+              {% for tag in hero.tags %}
+              <span>{{ tag }}</span>
+              {% endfor %}
+            </div>
+            <p class="terminal-line"><span>&gt;</span> Always building. Always learning.<b></b></p>
+          </div>
+
+          {% if hero.hero_image %}
+          <div class="hero-art hero-image-bg" role="img" aria-label="Anime style workspace illustration" style="background-image: url('{{ url_for('static', filename=hero.hero_image) }}');"></div>
+          {% else %}
+          <div class="hero-art" role="img" aria-label="Abstract purple-lit technology workspace illustration">
+            <div class="art-grid"></div>
+            <div class="art-orb orb-one"></div><div class="art-orb orb-two"></div>
+            <div class="art-window window-one"></div><div class="art-window window-two"></div>
+            <div class="art-caption">DIGITAL LAB / 001</div>
+          </div>
+          {% endif %}
+        </section>
+
+        <!-- 02 - KNOWLEDGE -->
+        <section class="panel knowledge-panel" id="knowledge">
+          <header class="knowledge-header">
+            <span class="panel-header-tag">02 · KNOWLEDGE</span>
+            <nav class="carousel-nav-controls" aria-label="Controles del carrusel">
+              <button class="scroll-btn" onclick="scrollTools(-1)" aria-label="Anterior">←</button>
+              <button class="scroll-btn" onclick="scrollTools(1)" aria-label="Siguiente">→</button>
+            </nav>
+          </header>
+          
+          <h2 class="section-title">Herramientas y tecnologías</h2>
+          
+          <ul class="tools-horizontal-list" id="toolsContainer">
+            {% for tool in knowledge_tools %}
+            <li class="tool-item-wrapper">
+              <div class="circular-icon" aria-hidden="true">
+                <span>{{ tool.icon }}</span>
+              </div>
+              <span class="tool-name">{{ tool.name }}</span>
+            </li>
+            {% endfor %}
+          </ul>
+        </section>
+
+        <!-- 03 - PROJECTS (Carrusel con botones flotantes en los extremos) -->
+        <section class="panel projects-panel" id="projects">
+          <div class="panel-header-tag">03 · PROJECTS</div>
+          <h2 class="section-title">Proyectos</h2>
+          
+          <div class="project-card-container" id="projectCard">
+            {% for project in projects %}
+            <div class="project-slide {% if loop.first %}active{% endif %}" data-index="{{ loop.index0 }}">
+              
+              <!-- Columna izquierda: Información del proyecto -->
+              <div class="project-copy">
+                <div class="project-counter">{{ project.id }} / {{ project.total }}</div>
+                <h3>{{ project.name }}</h3>
+                <p>{{ project.description }}</p>
+              </div>
+
+              <!-- Columna derecha: Vista previa visual / Arte -->
+              {% if project.image %}
+              <div class="project-art project-image-bg" role="img" aria-label="{{ project.name }} preview" style="background-image: url('{{ url_for('static', filename=project.image) }}');">
+                <div class="project-caption">PROJECT // {{ project.id }}</div>
+              </div>
+              {% else %}
+              <div class="project-art" role="img" aria-label="Abstract project preview">
+                <div class="project-caption">PROJECT // {{ project.id }}</div>
+              </div>
+              {% endif %}
+
+              <!-- Botones de navegación flotantes en los extremos -->
+              <button class="project-nav-btn prev-btn" onclick="changeProject(-1)" aria-label="Anterior"><span>&lt;</span></button>
+              <button class="project-nav-btn next-btn" onclick="changeProject(1)" aria-label="Siguiente"><span>&gt;</span></button>
+
+            </div>
+            {% endfor %}
+          </div>
+        </section>
+
+      </div>
+
+      <!-- COLUMNA DERECHA (Panel Lateral) -->
+      <aside class="side-column">
+        
+        <!-- 01 - CLOCK -->
+        <section class="panel clock-panel">
+          <div class="panel-header-tag">01 · CLOCK</div>
+          <div id="clock" class="clock">--:--:--</div>
+          <div id="date" class="clock-date">Fecha local</div>
+          <p>未来を作るのは、今の自分。</p>
+        </section>
+
+        <!-- 02 - FEATURED PROJECTS (Dinámico desde Flask) -->
+        <section class="panel featured" id="projects-sidebar">
+          <h2 class="panel-title">Featured Projects</h2>
+          <div class="project-list">
+            {% for project in featured_projects %}
+            <a class="project-item" href="{{ project.href | default('#projects') }}">
+              <span class="project-icon">{{ project.icon | safe }}</span>
+              <span class="project-copy">
+                <strong>{{ project.name }}</strong>
+                <small>{{ project.description }}</small>
+              </span>
+            </a>
+            {% endfor %}
+          </div>
+          <a class="panel-link" href="#projects">view all projects <span>→</span></a>
+        </section>
+
+        <!-- 02 - SKILLS MAP -->
+        <section class="panel skills-panel">
+          <h2 class="panel-title">SKILLS MAP</h2>
+          <div class="skill-map" aria-label="Knowledge areas map">
+            <svg viewBox="0 0 300 220" aria-hidden="true">
+              <polygon points="150,28 218,62 230,130 190,184 110,184 70,130 82,62"/>
+              <path d="M150 28 L230 130 L110 184 L82 62 L190 184 L218 62 L70 130 L150 28 M82 62 L190 184 M218 62 L110 184 M70 130 L230 130"/>
+              <circle cx="150" cy="28" r="4"/><circle cx="218" cy="62" r="4"/>
+              <circle cx="230" cy="130" r="4"/><circle cx="190" cy="184" r="4"/>
+              <circle cx="110" cy="184" r="4"/><circle cx="70" cy="130" r="4"/>
+              <circle cx="82" cy="62" r="4"/>
+            </svg>
+            <span class="skill-label s-ai">AI / ML</span><span class="skill-label s-linux">Linux</span>
+            <span class="skill-label s-net">Networking</span><span class="skill-label s-fpga">FPGA</span>
+            <span class="skill-label s-auto">Automation</span><span class="skill-label s-sec">Security</span>
+            <span class="skill-label s-emb">Embedded</span>
+          </div>
+          <p class="muted tiny centered">Áreas de conocimiento, sin puntuaciones de dominio.</p>
+        </section>
+
+        <!-- 03 - CONTACT -->
+        <section class="panel contact-panel" id="about">
+          <div class="panel-header-tag">03 · CONTACT</div>
+          <nav class="contact-links-list">
+            <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub ↗</a>
+            <a href="https://linkedin.com/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+            <a href="mailto:hello@example.com">Email ↗</a>
+            <a href="#home">Phone ↗</a>
+          </nav>
+        </section>
+
+      </aside>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <span>© {{ year }} Julie's Lab</span>
+      <span>Building the <b>future</b>, one system at a time.</span>
+    </footer>
+  </div>
+
+  <!-- Vinculación limpia del archivo JavaScript externo -->
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

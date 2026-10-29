@@ -1,0 +1,631 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&family=Press+Start+2P&family=VT323&display=swap');
+
+:root {
+  color-scheme: dark;
+  --bg: #07090f;
+  --panel: #0d111a;
+  --line: #222938;
+  --line-soft: rgba(117, 130, 157, .15);
+  --text: #d8dbe6;
+  --muted: #858da0;
+  --purple: #c17aff;
+  --cyan: #70d8c0;
+  --mono: "IBM Plex Mono", monospace;
+  --pixel-font: 'VT323', monospace;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+a { color: inherit; text-decoration: none; }
+.app-shell { max-width: 1400px; margin: 0 auto; padding: 0 16px 20px; }
+
+/* Topbar */
+.topbar {
+  min-height: 50px; display: flex; align-items: center; gap: 30px;
+  border-bottom: 1px solid var(--line); margin-bottom: 16px;
+}
+.brand { color: #f1eaff; font-weight: 600; }
+.brand span { color: var(--purple); }
+.main-nav { display: flex; gap: 20px; flex: 1; }
+.main-nav a { color: #9ca3b4; font-size: 11px; }
+.main-nav a:hover, .main-nav a.active { color: var(--purple); }
+.topbar-meta { color: var(--muted); font-size: 10px; display: flex; align-items: center; gap: 6px; }
+.status-dot { width: 7px; height: 7px; background: var(--cyan); border-radius: 50%; box-shadow: 0 0 8px var(--cyan); }
+
+/* Layout de dos columnas principales */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 16px;
+}
+
+.main-column, .side-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Paneles generales */
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: 20px;
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.panel-header-tag {
+  font-size: 10px;
+  color: var(--purple);
+  margin-bottom: 16px; /* Asegura separación correcta arriba */
+  font-weight: 600;
+  letter-spacing: .05em;
+  display: block;      /* Fuerza a quecuche su propia línea limpia */
+}
+
+.section-title {
+  font-size: 14px;
+  margin: 0 0 16px;
+  color: #fff;
+  font-weight: 500;
+}
+
+.hero h1 {
+  font-family: var(--pixel-font);
+  font-size: 46px;
+  line-height: 1.4;       /* Espaciado perfecto entre líneas si llega a saltar */
+  margin: 0 0 18px;
+  font-weight: 400;       /* Press Start 2P usa peso normal por defecto */
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 2;
+  width: 58%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.eyebrow { 
+  margin: 0 0 12px; 
+  color: var(--purple); 
+  font-size: 11.5px;
+  letter-spacing: .05em;
+}
+
+.hero h1 span { 
+  color: var(--purple); 
+}
+
+.hero-description {
+  max-width: 480px;
+  font-size: 15px;       /* Tamaño de fuente más legible y exacto al original */
+  line-height: 1.7;
+  color: #c4c9d6;
+  margin: 0 0 22px;
+}
+
+.tag-list { 
+  display: flex; 
+  flex-wrap: wrap; 
+  gap: 7px; 
+  max-width: 500px; 
+  margin-bottom: 24px; 
+}
+
+.tag-list span { 
+  border: 1px solid #52357d; 
+  color: #d8b4ff; 
+  padding: 6px 10px; 
+  font-size: 9.5px; 
+  letter-spacing: .04em;
+  background: rgba(122, 68, 178, 0.08);
+}
+
+.terminal-line { 
+  color: #9da6b8; 
+  font-size: 11.5px; 
+  margin-top: 2px;
+}
+
+.terminal-line span { color: var(--purple); }
+.hero h1, .terminal-line b {
+  image-rendering: pixelated;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: unset;
+}
+
+@keyframes blink { to { visibility: hidden; } }
+
+/* Arte abstracto por defecto */
+.hero-art {
+  position: absolute;
+  inset: 0 0 0 38%;
+  z-index: 1;
+  overflow: hidden;
+  opacity: .85;
+  background: radial-gradient(ellipse at 65% 40%, rgba(103,54,153,.34), transparent 48%), linear-gradient(90deg, var(--panel) 0%, rgba(17,22,33,.3) 50%, rgba(17,22,33,.08));
+  
+  /* Aplicamos la máscara de desvanecimiento directamente al contenedor general */
+  -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 25%);
+  mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 25%);
+}
+
+.art-grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(169,113,221,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(169,113,221,.07) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.art-orb { position: absolute; border-radius: 50%; filter: blur(1px); }
+.orb-one { width: 160px; height: 160px; right: 12%; top: 22%; border: 1px solid rgba(205,145,255,.5); box-shadow: 0 0 40px rgba(153,76,220,.17), inset 0 0 35px rgba(153,76,220,.12); }
+.orb-two { width: 70px; height: 70px; right: 25%; top: 34%; background: rgba(156,91,221,.13); box-shadow: 0 0 50px rgba(183,94,255,.45); }
+.art-window { position: absolute; border: 1px solid rgba(193,122,255,.35); background: rgba(18,21,38,.5); box-shadow: 0 0 25px rgba(129,70,190,.12); }
+.window-one { width: 120px; height: 70px; right: 6%; top: 12%; }
+.window-two { width: 150px; height: 85px; right: 22%; bottom: 12%; }
+.art-caption { position: absolute; right: 12px; bottom: 10px; color: #bd8ce6; font-size: 9px; letter-spacing: .16em; }
+
+.hero-image-bg {
+  background-size: cover;
+  background-position: center;
+  opacity: 0.8;
+  /* Ya no necesitamos el mask-image aquí porque el contenedor padre (.hero-art) se encarga de todo el borde */
+}
+
+.hero-image-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* Usamos tu color temático --purple con una opacidad muy baja (ej. 12%) */
+  background: linear-gradient(135deg, rgba(193, 122, 255, 0.50) 0%, rgba(11, 14, 22, 0.2) 100%);
+  pointer-events: none; /* Permite que cualquier interacción atraviese la capa si la hubiera */
+  mix-blend-mode: overlay; /* Fusiona de manera orgánica el morado con los tonos de la imagen */
+}
+
+/* Knowledge / Carrusel de Herramientas - Barra de scroll dinámica */
+.knowledge-panel {
+  overflow: hidden;
+}
+
+.knowledge-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.knowledge-header .panel-header-tag {
+  margin-bottom: 0;
+}
+
+.carousel-nav-controls {
+  display: flex;
+  gap: 6px;
+}
+
+.scroll-btn {
+  background: rgba(193, 122, 255, 0.1);
+  border: 1px solid #4a3070;
+  color: var(--purple);
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  font-size: 10px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background 0.2s;
+}
+
+.scroll-btn:hover {
+  background: rgba(193, 122, 255, 0.25);
+}
+
+.tools-horizontal-list {
+  list-style: none;
+  padding: 12px 0 14px 0;
+  margin: 0 0 8px 0;
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  width: 100%;
+  
+  scroll-behavior: smooth;
+  
+  /* Por defecto, hacemos que la barra de scroll sea totalmente invisible (oculta) */
+  scrollbar-width: none; /* Para Firefox */
+}
+
+/* Para navegadores basados en WebKit (Chrome, Edge, Safari), la ocultamos por defecto */
+.tools-horizontal-list::-webkit-scrollbar {
+  height: 5px;
+}
+.tools-horizontal-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+.tools-horizontal-list::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+/* --- CUANDO EL CURSOR ESTÁ SOBRE EL PANEL DE KNOWLEDGE --- */
+.knowledge-panel:hover .tools-horizontal-list {
+  scrollbar-width: thin; /* Reaparece en Firefox */
+  scrollbar-color: var(--purple) var(--line);
+}
+
+.knowledge-panel:hover .tools-horizontal-list::-webkit-scrollbar-track {
+  background: rgba(13, 17, 26, 0.8);
+  border-radius: 3px;
+}
+
+.knowledge-panel:hover .tools-horizontal-list::-webkit-scrollbar-thumb {
+  background: #52357d;
+  border-radius: 3px;
+}
+
+.knowledge-panel:hover .tools-horizontal-list::-webkit-scrollbar-thumb:hover {
+  background: var(--purple);
+}
+
+.tool-item-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto; 
+  width: 68px;
+}
+
+.circular-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--purple);
+  display: grid;
+  place-items: center;
+  background: rgba(193, 122, 255, 0.05);
+  color: var(--purple);
+  font-size: 12px;
+  font-weight: 500;
+  box-shadow: 0 0 10px rgba(193, 122, 255, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.circular-icon:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(193, 122, 255, 0.3);
+  background: rgba(193, 122, 255, 0.12);
+}
+
+.tool-name {
+  font-size: 9.5px;
+  color: var(--muted);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+/* --- Sección de Proyectos (Estilo Hero & Gallery) --- */
+.projects-panel {
+  position: relative;
+  overflow: hidden;
+}
+
+.project-card-container {
+  min-height: 260px;
+  position: relative;
+}
+
+.project-slide {
+  display: none;
+  position: relative;
+  isolation: isolate;
+  min-height: 260px;
+}
+
+/* Marco de doble línea cyberpunk para la diapositiva activa del proyecto */
+.project-slide.active {
+  display: flex;
+  position: relative;
+  overflow: hidden; /* <--- Clave para evitar que cualquier elemento hijo se salga del marco */
+  border: 1px solid rgba(193, 122, 255, 0.35);
+  box-shadow: 
+    0 0 0 2px var(--panel), 
+    0 0 0 3px rgba(48, 55, 70, 0.35); 
+  background: var(--panel);
+}
+
+.project-copy {
+  position: relative;
+  z-index: 2;
+  width: 65%;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.project-counter {
+  font-size: 10px;
+  color: var(--purple);
+  margin-bottom: 6px;
+}
+
+.project-slide h3 {
+  margin: 0 0 6px;
+  font-family: "Space Mono", var(--mono);
+  font-size: 16px;
+  color: #fff;
+  font-weight: 700;
+}
+
+.project-slide p {
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.6;
+  max-width: 420px;
+}
+
+.project-nav-btn {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  z-index: 10;
+  background: transparent;
+  border: none;
+  color: var(--purple);
+  width: 48px;
+  display: grid;
+  place-items: center;
+  font-family: var(--mono);
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.project-nav-btn span {
+  display: inline-block;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.project-nav-btn:hover span {
+  color: #fff;
+  transform: scale(1.35); /* Ajusta este valor si quieres que crezca más o menos */
+}
+
+.project-nav-btn.prev-btn {
+  left: 0;
+  background: linear-gradient(to right, rgba(193, 122, 255, 0.22) 0%, rgba(193, 122, 255, 0.04) 60%, transparent 100%);
+}
+
+.project-nav-btn.next-btn {
+  right: 0;
+  background: linear-gradient(to left, rgba(193, 122, 255, 0.22) 0%, rgba(193, 122, 255, 0.04) 60%, transparent 100%);
+}
+
+/* Arte visual del proyecto a la derecha (hereda el fade del Hero y el estilo de la Gallery) */
+.project-art {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 38%; /* Respeta el inicio del área derecha sin desbordar */
+  z-index: 1;
+  overflow: hidden;
+  opacity: .9;
+  background: radial-gradient(circle at 75% 45%, rgba(193, 122, 255, 0.3), transparent 50%), linear-gradient(90deg, var(--panel) 0%, rgba(17,22,33,.4) 40%, rgba(17,22,33,.1));
+  
+  -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 25%);
+  mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 25%);
+}
+
+/* Textura de líneas diagonales heredada de la galería */
+.project-art::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(135deg, transparent 0 14px, rgba(180, 112, 255, 0.07) 15px 16px);
+  pointer-events: none;
+}
+
+.project-image-bg {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.project-caption {
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+  color: #bd8ce6;
+  font-size: 9px;
+  letter-spacing: .16em;
+  z-index: 2;
+}
+
+/* Ajuste responsivo para pantallas pequeñas */
+@media (max-width: 760px) {
+  .project-slide.active { display: block; }
+  .project-copy { width: 100%; padding: 16px; }
+  .project-art { inset: 0; opacity: .35; -webkit-mask-image: none; mask-image: none; }
+}
+
+/* Clock Panel */
+.clock-panel { text-align: center; }
+.clock { color: var(--purple); font-size: 28px; font-weight: bold; margin-bottom: 4px; }
+.clock-date { color: var(--muted); font-size: 10px; margin-bottom: 10px; }
+.clock-panel p { color: #a879d6; font-size: 10px; margin: 0; }
+
+/* --- Panel de Proyectos Destacados (Barra Lateral) --- */
+.panel.featured {
+  display: flex;
+  flex-direction: column;
+  padding: 0; /* Quitamos el padding general para que el título ocupe todo el ancho con su borde */
+  overflow: hidden;
+}
+
+/* Título con línea divisoria integrada al diseño de la página */
+.panel.featured .panel-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--purple);
+  padding: 16px 20px 12px 20px;
+  margin: 0;
+  border-bottom: 1px solid var(--line);
+  letter-spacing: .05em;
+  font-family: var(--mono);
+}
+
+/* Lista de proyectos */
+.panel.featured .project-list {
+  display: flex;
+  flex-direction: column;
+  padding: 14px 20px;
+  gap: 12px;
+}
+
+/* Ítem individual de la lista */
+.panel.featured .project-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+  transition: opacity 0.2s ease;
+}
+
+.panel.featured .project-item:hover {
+  opacity: 0.85;
+}
+
+/* Ícono estilizado acorde a la paleta */
+.panel.featured .project-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 36px;
+  height: 36px;
+  color: var(--purple);
+  background-color: rgba(193, 122, 255, 0.08);
+  border: 1px solid rgba(193, 122, 255, 0.25);
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.panel.featured .project-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+/* Texto del proyecto */
+.panel.featured .project-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.panel.featured .project-copy strong {
+  color: #fff;
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.panel.featured .project-copy small {
+  color: var(--muted);
+  font-size: 9.5px;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Enlace inferior (view all projects) */
+.panel.featured .panel-link {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px 16px 20px;
+  color: var(--purple);
+  font-size: 10px;
+  text-decoration: none;
+  border-top: 1px solid var(--line-soft);
+  transition: color 0.2s ease;
+}
+
+.panel.featured .panel-link:hover {
+  color: #fff;
+}
+
+/* Skills Map (Hexágono) */
+.skill-map { height: 180px; position: relative; }
+.skill-map svg { position: absolute; width: 100%; height: 100%; inset: 0; }
+.skill-map polygon, .skill-map path { fill: rgba(157,92,219,.08); stroke: #76519a; stroke-width: 1; }
+.skill-map circle { fill: var(--purple); }
+.skill-label { position: absolute; font-size: 9px; color: var(--muted); }
+.s-ai { top: 5%; left: 42%; }
+.s-linux { top: 20%; right: 10%; }
+.s-net { top: 50%; right: 2%; }
+.s-fpga { bottom: 10%; right: 20%; }
+.s-auto { bottom: 10%; left: 20%; }
+.s-sec { top: 50%; left: 5% ; }
+.s-emb { top: 20%; left: 10%; }
+.centered { text-align: center; }
+
+/* Contact Panel */
+.contact-links-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.contact-links-list a {
+  color: var(--text);
+  font-size: 11px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.contact-links-list a:hover { color: var(--purple); }
+
+/* Footer */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 10px;
+}
+.footer b { color: var(--purple); }
+
+/* Responsive */
+@media(max-width: 900px) {
+  .dashboard-grid { grid-template-columns: 1fr; }
+  .hero-copy { width: 100%; }
+  .hero-art { inset: 0; opacity: 0.35; }
+}

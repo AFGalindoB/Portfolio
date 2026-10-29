@@ -1,0 +1,60 @@
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Entornos virtuales
+.venv/
+venv/
+env/
+ENV/
+
+# Flask
+instance/
+.webassets-cache/
+
+# Variables de entorno y secretos
+.env
+.env.*
+!.env.example
+
+# Testing y cobertura
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+
+# Linters y type checkers
+.mypy_cache/
+.dmypy.json
+.pyre/
+.ruff_cache/
+
+# Build y distribución
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Logs
+*.log
+logs/
+
+# Bases de datos locales
+*.db
+*.sqlite
+*.sqlite3
+
+# Archivos temporales y del sistema
+.tmp/
+temp/
+.cache/
+.DS_Store
+Thumbs.db
+
+static/img/test
